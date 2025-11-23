@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
-import { Inter, Syne } from "next/font/google";
+import { Outfit, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "lenis/react";
+import { CustomCursor } from "@/components/ui/custom-cursor";
 
-const inter = Inter({
-  variable: "--font-inter",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const cormorant = Cormorant_Garamond({
+  variable: "--font-cormorant",
   subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -35,9 +37,10 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body
-        className={`${inter.variable} ${syne.variable} antialiased bg-zns-dark text-zns-cream selection:bg-zns-mint selection:text-zns-dark`}
+        className={`${outfit.variable} ${cormorant.variable} antialiased bg-zns-dark text-zns-cream selection:bg-zns-mint selection:text-zns-dark`}
       >
         <ReactLenis root>
+          <CustomCursor />
           {children}
         </ReactLenis>
       </body>

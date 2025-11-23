@@ -3,6 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 
 export const FinalCTA = () => {
@@ -38,9 +39,11 @@ export const FinalCTA = () => {
                     viewport={{ once: true }}
                     transition={{ delay: 0.4 }}
                 >
-                    <MagneticButton className="text-xl px-12 py-6">
-                        Get in Touch <ArrowRight className="ml-2 w-6 h-6" />
-                    </MagneticButton>
+                    <Link href="/contact">
+                        <MagneticButton className="text-xl px-12 py-6">
+                            Get in Touch <ArrowRight className="ml-2 w-6 h-6" />
+                        </MagneticButton>
+                    </Link>
                 </motion.div>
             </div>
         </section>

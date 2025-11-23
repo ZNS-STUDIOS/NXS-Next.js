@@ -12,6 +12,7 @@ const navLinks = [
     { name: "Services", href: "#services" },
     { name: "Process", href: "#process" },
     { name: "Why Us", href: "#why-us" },
+    { name: "Portfolio", href: "/portfolio" },
     { name: "FAQ", href: "#faq" },
 ];
 
@@ -63,9 +64,17 @@ export const Navigation = () => {
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-zns-mint transition-all duration-300 group-hover:w-full" />
                             </Link>
                         ))}
-                        <MagneticButton className="px-6 py-2 text-sm">
-                            GET IN TOUCH <ArrowRight className="w-4 h-4" />
-                        </MagneticButton>
+                        <Link
+                            href="/careers"
+                            className="text-sm font-medium text-zns-mint hover:text-white transition-colors flex items-center gap-2"
+                        >
+                            Join Nexus
+                        </Link>
+                        <Link href="/contact">
+                            <MagneticButton className="px-6 py-2 text-sm">
+                                GET IN TOUCH <ArrowRight className="w-4 h-4" />
+                            </MagneticButton>
+                        </Link>
                     </nav>
 
                     {/* Mobile Menu Button */}
@@ -110,10 +119,20 @@ export const Navigation = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5 }}
+                                className="flex flex-col items-center gap-6"
                             >
-                                <MagneticButton className="mt-8 text-lg px-8 py-4">
-                                    GET IN TOUCH
-                                </MagneticButton>
+                                <Link
+                                    href="/careers"
+                                    className="text-xl font-bold text-zns-mint hover:text-white transition-colors"
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Join Nexus
+                                </Link>
+                                <Link href="/contact" onClick={() => setIsOpen(false)}>
+                                    <MagneticButton className="text-lg px-8 py-4">
+                                        GET IN TOUCH
+                                    </MagneticButton>
+                                </Link>
                             </motion.div>
                         </nav>
                     </motion.div>

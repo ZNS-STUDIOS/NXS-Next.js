@@ -33,13 +33,19 @@ export const Footer = () => {
                     <div>
                         <h4 className="text-white font-bold mb-6">Quick Links</h4>
                         <ul className="space-y-4">
-                            {["Services", "Process", "Why Us", "FAQ"].map((item) => (
-                                <li key={item}>
+                            {[
+                                { name: "Services", href: "/#services" },
+                                { name: "Process", href: "/#process" },
+                                { name: "Why Us", href: "/#why-us" },
+                                { name: "FAQ", href: "/#faq" },
+                                { name: "Careers", href: "/careers" },
+                            ].map((link) => (
+                                <li key={link.name}>
                                     <Link
-                                        href={`#${item.toLowerCase().replace(" ", "-")}`}
+                                        href={link.href}
                                         className="text-zns-cream/60 hover:text-zns-mint transition-colors"
                                     >
-                                        {item}
+                                        {link.name}
                                     </Link>
                                 </li>
                             ))}
