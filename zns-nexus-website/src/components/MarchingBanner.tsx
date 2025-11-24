@@ -1,58 +1,48 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cn } from "@/lib/utils";
+import React from "react";
+import { motion } from "framer-motion";
+
+const items = ["STRATEGY", "DESIGN", "DEVELOPMENT", "GROWTH"];
 
 export const MarchingBanner = () => {
-    const firstText = useRef<HTMLDivElement>(null);
-    const secondText = useRef<HTMLDivElement>(null);
-    const slider = useRef<HTMLDivElement>(null);
-
-    let xPercent = 0;
-    let direction = -1;
-
-    useEffect(() => {
-        gsap.registerPlugin(ScrollTrigger);
-
-        requestAnimationFrame(animate);
-
-        gsap.to(slider.current, {
-            scrollTrigger: {
-                trigger: document.documentElement,
-                scrub: 0.25,
-                start: 0,
-                end: window.innerHeight,
-                onUpdate: e => direction = e.direction * -1
-            },
-            x: "-500px",
-        });
-    }, []);
-
-    const animate = () => {
-        if (xPercent < -100) {
-            xPercent = 0;
-        } else if (xPercent > 0) {
-            xPercent = -100;
-        }
-
-        gsap.set(firstText.current, { xPercent: xPercent });
-        gsap.set(secondText.current, { xPercent: xPercent });
-
-        xPercent += 0.1 * direction;
-        requestAnimationFrame(animate);
-    };
-
     return (
-        <div className="relative flex h-[15vh] overflow-hidden bg-zns-mint text-zns-dark items-center">
-            <div ref={slider} className="relative whitespace-nowrap flex">
-                <p ref={firstText} className="text-[10vh] font-display font-bold pr-10">
-                    STRATEGY • DESIGN • DEVELOPMENT • GROWTH •
-                </p>
-                <p ref={secondText} className="absolute left-full top-0 text-[10vh] font-display font-bold pr-10">
-                    STRATEGY • DESIGN • DEVELOPMENT • GROWTH •
-                </p>
+        <div className="relative flex h-[20vh] overflow-hidden bg-zns-dark items-center border-y border-white/5">
+            <div className="flex whitespace-nowrap">
+                <motion.div
+                    animate={{ x: [0, -2000] }}
+                    transition={{
+                        repeat: Infinity,
+                        duration: 30,
+                        ease: "linear",
+                    }}
+                    className="flex items-center"
+                >
+                    {items.map((item, index) => (
+                        <span
+                            key={index}
+                            className="inline-block mx-8 text-8xl md:text-9xl font-display font-bold"
+                            style={{
+                                WebkitTextStroke: '2px rgba(20, 224, 142, 0.5)',
+                                color: 'rgba(20, 224, 142, 0.2)',
+                            }}
+                        >
+                            {item} •
+                        </span>
+                    ))}
+                    {items.map((item, index) => (
+                        <span
+                            key={`dup-${index}`}
+                            className="inline-block mx-8 text-8xl md:text-9xl font-display font-bold"
+                            style={{
+                                WebkitTextStroke: '2px rgba(20, 224, 142, 0.5)',
+                                color: 'rgba(20, 224, 142, 0.2)',
+                            }}
+                        >
+                            {item} •
+                        </span>
+                    ))}
+                </motion.div>
             </div>
         </div>
     );

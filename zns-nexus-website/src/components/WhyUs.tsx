@@ -2,54 +2,85 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Scale, Heart, Layers } from "lucide-react";
+import { Zap, Users, Sparkles, TrendingUp, Award, Wallet } from "lucide-react";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { cn } from "@/lib/utils";
 
 const features = [
     {
         title: "Premium Quality, Fair Pricing",
-        description: "Get the best without breaking the bank. We believe exceptional work shouldn't come with exploitative pricing.",
-        icon: Scale,
+        description: "We believe exceptional work shouldn't come with exploitative pricing. Premium quality but in budget.",
+        icon: Wallet,
+        className: "md:col-span-2",
     },
     {
-        title: "Relationship-First Approach",
-        description: "You're not just a project number to us. We build lasting partnerships based on trust, transparency, and mutual success.",
-        icon: Heart,
+        title: "Global Reach",
+        description: "Serving clients across UAE, Canada, and India.",
+        icon: Users,
+        className: "md:col-span-1",
     },
     {
-        title: "End-to-End Solutions",
-        description: "One partner for all your digital needs. From strategy to execution to growth, we handle everything.",
-        icon: Layers,
+        title: "Lightning Fast",
+        description: "Rapid iteration and deployment without compromising quality.",
+        icon: Zap,
+        className: "md:col-span-1",
+    },
+    {
+        title: "Creative Excellence",
+        description: "We build partnerships, not just client lists.",
+        icon: Sparkles,
+        className: "md:col-span-2",
+    },
+    {
+        title: "Growth Driven",
+        description: "Strategy, Design, Development, Growth. All under one roof.",
+        icon: TrendingUp,
+        className: "md:col-span-3",
     },
 ];
 
 export const WhyUs = () => {
     return (
-        <section id="why-us" className="py-24 bg-zns-dark/50 relative">
+        <section id="why-us" className="py-24 bg-zns-dark relative">
             <div className="container mx-auto px-4">
-                <motion.h2
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-4xl md:text-6xl font-display font-bold text-white mb-16 text-center"
-                >
-                    The ZNS Difference
-                </motion.h2>
+                <div className="mb-16 text-center">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-5xl md:text-7xl font-display font-bold text-white mb-6"
+                    >
+                        WHY <span className="text-zns-mint">NEXUS?</span>
+                    </motion.h2>
+                    <p className="text-xl text-zns-cream/60 max-w-2xl mx-auto">
+                        We don't just build digital products. We build digital legacies.
+                    </p>
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            transition={{ delay: index * 0.2 }}
-                            className="text-center p-8"
+                            transition={{ delay: index * 0.1 }}
+                            className={cn(
+                                "group relative p-8 rounded-3xl border border-white/10 overflow-hidden hover:border-zns-mint/30 transition-colors duration-500 min-h-[250px] flex flex-col justify-between",
+                                feature.className
+                            )}
                         >
-                            <div className="w-20 h-20 mx-auto bg-gradient-to-br from-zns-mint to-zns-teal rounded-2xl flex items-center justify-center mb-8 rotate-3 hover:rotate-6 transition-transform duration-300">
-                                <feature.icon className="w-10 h-10 text-white" />
+                            <BorderBeam lightColor="#14e08e" lightWidth={350} duration={8} />
+                            <div className="absolute inset-0 bg-[#0a0a0a] -z-10" />
+
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                                    <feature.icon className="w-6 h-6 text-white" />
+                                </div>
+
+                                <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3">{feature.title}</h3>
+                                <p className="text-zns-cream/60 group-hover:text-zns-cream/90 transition-colors text-lg">{feature.description}</p>
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-4">{feature.title}</h3>
-                            <p className="text-zns-cream/70">{feature.description}</p>
                         </motion.div>
                     ))}
                 </div>

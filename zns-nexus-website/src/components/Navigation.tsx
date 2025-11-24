@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MagneticButton } from "@/components/ui/magnetic-button";
@@ -13,22 +13,22 @@ const navLinks = [
     { name: "Process", href: "#process" },
     { name: "Why Us", href: "#why-us" },
     { name: "Portfolio", href: "/portfolio" },
-    { name: "FAQ", href: "#faq" },
 ];
 
 export const Navigation = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isScrolled, setIsScrolled] = useState(false);
+    const [hidden, setHidden] = useState(false);
+    const { scrollY } = useScroll();
     const pathname = usePathname();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
-
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious() ?? 0;
+        if (latest > previous && latest > 150) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+    });
 
     // Close mobile menu when route changes
     useEffect(() => {
@@ -37,103 +37,86 @@ export const Navigation = () => {
 
     return (
         <>
-            <header
-                className={cn(
-                    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
-                    isScrolled
-                        ? "bg-zns-dark/80 backdrop-blur-md border-b border-white/10 py-4"
-                        : "bg-transparent py-6"
-                )}
+            <motion.header
+                variants={{
+                    visible: { y: 0, opacity: 1 },
+                    hidden: { y: -100, opacity: 0 },
+                }}
+                animate={hidden ? "hidden" : "visible"}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+                className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none"
             >
-                <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-                    <Link href="/" className="relative z-50 group">
-                        <span className="font-display text-2xl md:text-3xl font-bold text-white tracking-tighter">
-                            ZNS <span className="text-zns-mint">Nexus</span>
+                <div className="pointer-events-auto glass-panel rounded-full px-2 py-2 md:px-6 md:py-3 flex items-center gap-4 md:gap-8 mx-4 shadow-premium">
+                    <Link href="/" className="relative z-50 group px-2">
+                        <span className="font-display text-xl md:text-2xl font-bold text-white tracking-tighter">
+                            ZNS
                         </span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden md:flex items-center gap-8">
+                    <nav className="hidden md:flex items-center gap-1">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.name}
                                 href={link.href}
-                                className="text-sm font-medium text-zns-cream/80 hover:text-zns-mint transition-colors relative group"
+                                className="text-xs font-medium text-zns-cream/70 hover:text-white transition-colors px-4 py-2 rounded-full hover:bg-white/5"
                             >
                                 {link.name}
-                                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-zns-mint transition-all duration-300 group-hover:w-full" />
                             </Link>
                         ))}
-                        <Link
-                            href="/careers"
-                            className="text-sm font-medium text-zns-mint hover:text-white transition-colors flex items-center gap-2"
-                        >
-                            Join Nexus
-                        </Link>
-                        <Link href="/contact">
-                            <MagneticButton className="px-6 py-2 text-sm">
-                                GET IN TOUCH <ArrowRight className="w-4 h-4" />
-                            </MagneticButton>
-                        </Link>
                     </nav>
 
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="md:hidden relative z-50 text-white p-2"
-                        onClick={() => setIsOpen(!isOpen)}
-                        aria-label="Toggle menu"
-                    >
-                        {isOpen ? <X className="w-8 h-8" /> : <Menu className="w-8 h-8" />}
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <Link href="/careers" className="hidden md:block">
+                            <button className="px-4 py-2 text-xs text-zns-mint hover:text-white font-bold rounded-full hover:bg-white/5 transition-colors">
+                                JOIN NEXUS
+                            </button>
+                        </Link>
+                        <Link href="/contact" className="hidden md:block">
+                            <MagneticButton className="px-5 py-2 text-xs bg-zns-mint text-zns-dark hover:bg-white font-bold rounded-full shadow-[0_0_20px_rgba(20,224,142,0.3)]">
+                                LET'S TALK
+                            </MagneticButton>
+                        </Link>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="md:hidden relative z-50 text-white p-2 rounded-full hover:bg-white/10 transition-colors"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle menu"
+                        >
+                            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                        </button>
+                    </div>
                 </div>
-            </header>
+            </motion.header>
 
             {/* Mobile Menu Drawer */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, x: "100%" }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: "100%" }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-40 bg-zns-dark flex flex-col justify-center items-center md:hidden"
+                        initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                        animate={{ opacity: 1, scale: 1, y: 0 }}
+                        exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                        transition={{ duration: 0.2 }}
+                        className="fixed inset-x-4 top-24 z-40 bg-[#0a0a0a] border border-white/10 rounded-3xl p-6 md:hidden shadow-2xl"
                     >
-                        <nav className="flex flex-col items-center gap-8">
+                        <nav className="flex flex-col gap-4">
                             {navLinks.map((link, index) => (
-                                <motion.div
-                                    key={link.name}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.1 + index * 0.1 }}
-                                >
-                                    <Link
-                                        href={link.href}
-                                        className="font-display text-4xl font-bold text-white hover:text-zns-mint transition-colors"
-                                        onClick={() => setIsOpen(false)}
-                                    >
-                                        {link.name}
-                                    </Link>
-                                </motion.div>
-                            ))}
-                            <motion.div
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.5 }}
-                                className="flex flex-col items-center gap-6"
-                            >
                                 <Link
-                                    href="/careers"
-                                    className="text-xl font-bold text-zns-mint hover:text-white transition-colors"
+                                    key={link.name}
+                                    href={link.href}
+                                    className="text-lg font-medium text-white hover:text-zns-mint transition-colors p-2"
                                     onClick={() => setIsOpen(false)}
                                 >
-                                    Join Nexus
+                                    {link.name}
                                 </Link>
-                                <Link href="/contact" onClick={() => setIsOpen(false)}>
-                                    <MagneticButton className="text-lg px-8 py-4">
-                                        GET IN TOUCH
-                                    </MagneticButton>
-                                </Link>
-                            </motion.div>
+                            ))}
+                            <div className="h-px bg-white/10 my-2" />
+                            <Link href="/contact" onClick={() => setIsOpen(false)}>
+                                <div className="w-full bg-zns-mint text-zns-dark font-bold text-center py-3 rounded-xl">
+                                    START PROJECT
+                                </div>
+                            </Link>
                         </nav>
                     </motion.div>
                 )}

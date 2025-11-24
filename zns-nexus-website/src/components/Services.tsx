@@ -5,11 +5,12 @@ import { Code, Film, Share2, PenTool, ArrowUpRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ServiceCursor } from "@/components/ui/service-cursor";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const services = [
     {
         title: "Web Development",
-        description: "Transform your vision into stunning, high-performance websites and applications. From e-commerce to SaaS platforms.",
+        description: "Transform your vision into stunning, high-performance digital experiences. From e-commerce to SaaS platforms.",
         icon: Code,
         color: "bg-blue-500",
         caseStudySlug: "quantum-email-platform",
@@ -74,47 +75,49 @@ export const Services = () => {
 
                 {/* Horizontal Scroll Container */}
                 <div className="relative">
-                    <div className="overflow-x-auto overflow-y-hidden scrollbar-hide pb-8">
-                        <div className="flex gap-6 px-4 md:px-8 min-w-max">
+                    <div className="overflow-x-auto overflow-y-hidden scrollbar-hide pb-12">
+                        <div className="flex gap-4 md:gap-8 px-4 md:px-12 min-w-max">
                             {services.map((service, index) => {
                                 const Icon = service.icon;
                                 return (
                                     <motion.div
                                         key={index}
-                                        initial={{ opacity: 0, y: 50 }}
-                                        whileInView={{ opacity: 1, y: 0 }}
+                                        initial={{ opacity: 0, x: 50 }}
+                                        whileInView={{ opacity: 1, x: 0 }}
                                         transition={{
-                                            duration: 0.5,
+                                            duration: 0.6,
                                             delay: index * 0.1,
                                             ease: "easeOut"
                                         }}
-                                        viewport={{ once: true, margin: "-100px" }}
+                                        viewport={{ once: true, margin: "-50px" }}
                                         onClick={() => handleServiceClick(service.caseStudySlug)}
                                         onMouseEnter={() => setHoveredService(service)}
                                         onMouseLeave={() => setHoveredService(null)}
-                                        className="w-[85vw] md:w-[450px] aspect-[4/5] bg-white/5 border border-white/10 rounded-3xl p-8 flex flex-col justify-between backdrop-blur-md hover:border-zns-mint/50 transition-all duration-300 group cursor-pointer hover:scale-[1.02] flex-shrink-0"
+                                        className="w-[85vw] md:w-[400px] aspect-[3/4] relative group cursor-pointer"
                                     >
-                                        {/* Hover Gradient Overlay */}
-                                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" />
+                                        <div className="absolute inset-0 bg-[#0a0a0a] border border-white/10 group-hover:border-zns-mint/30 transition-colors duration-500" />
+                                        <BorderBeam lightColor="#14e08e" lightWidth={350} duration={10} delay={index * 2} />
 
-                                        <div className="relative z-10">
-                                            {/* Icon and Arrow */}
-                                            <div className="flex justify-between items-start mb-8">
-                                                <div className={`w-14 h-14 rounded-2xl ${service.color} bg-opacity-20 flex items-center justify-center`}>
-                                                    <Icon className="w-7 h-7 text-white" />
-                                                </div>
-                                                <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-zns-mint group-hover:border-zns-mint transition-colors">
-                                                    <ArrowUpRight className="w-5 h-5 text-white" />
+                                        <div className="relative h-full p-8 md:p-10 flex flex-col justify-between z-10">
+                                            {/* Header */}
+                                            <div className="flex justify-between items-start">
+                                                <span className="font-display text-4xl md:text-5xl text-white/20 group-hover:text-zns-mint transition-colors duration-500">
+                                                    0{index + 1}
+                                                </span>
+                                                <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-zns-mint group-hover:border-zns-mint transition-all duration-300">
+                                                    <ArrowUpRight className="w-5 h-5 text-white group-hover:text-zns-dark" />
                                                 </div>
                                             </div>
 
-                                            {/* Title and Description */}
-                                            <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-4 group-hover:text-zns-mint transition-colors">
-                                                {service.title}
-                                            </h3>
-                                            <p className="text-zns-cream/70 text-sm md:text-base leading-relaxed">
-                                                {service.description}
-                                            </p>
+                                            {/* Content */}
+                                            <div>
+                                                <h3 className="text-3xl md:text-4xl font-display italic text-white mb-4 group-hover:translate-x-2 transition-transform duration-300">
+                                                    {service.title}
+                                                </h3>
+                                                <p className="text-zns-cream/60 text-sm md:text-base leading-relaxed border-t border-white/10 pt-4 group-hover:border-zns-mint/30 transition-colors duration-500">
+                                                    {service.description}
+                                                </p>
+                                            </div>
                                         </div>
                                     </motion.div>
                                 );
@@ -123,10 +126,11 @@ export const Services = () => {
                     </div>
 
                     {/* Scroll Indicator */}
-                    <div className="text-center mt-8">
-                        <p className="text-zns-mint/60 text-sm uppercase tracking-wider">
-                            ← Scroll to explore →
-                        </p>
+                    <div className="container mx-auto px-4 mt-8 flex justify-end">
+                        <div className="flex items-center gap-4 text-zns-cream/40 text-sm uppercase tracking-widest">
+                            <span>Scroll to explore</span>
+                            <div className="w-12 h-px bg-white/20" />
+                        </div>
                     </div>
                 </div>
             </section>

@@ -1,28 +1,33 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import { BorderBeam } from "@/components/ui/border-beam";
 
 const steps = [
     {
-        number: "01",
+        id: "01",
         title: "Discovery",
-        description: "We dive deep into your goals, audience, and vision. Understanding your needs is where every great project begins.",
+        description: "We dive deep into your brand, audience, and goals to uncover unique opportunities.",
+        color: "bg-black/40",
     },
     {
-        number: "02",
+        id: "02",
         title: "Strategy",
-        description: "Custom solutions tailored to your business. We create a roadmap that aligns with your objectives and sets clear milestones.",
+        description: "Custom solutions tailored to your business. We create a roadmap that aligns with your objectives.",
+        color: "bg-black/40",
     },
     {
-        number: "03",
-        title: "Creation",
-        description: "Our team brings your vision to life with precision and creativity. Every detail is crafted to exceed expectations.",
+        id: "03",
+        title: "Design",
+        description: "Visual storytelling that captivates. We craft interfaces that are both beautiful and functional.",
+        color: "bg-black/40",
     },
     {
-        number: "04",
-        title: "Growth",
-        description: "Launch is just the beginning. We provide ongoing support, optimization, and strategies to ensure your continued success.",
+        id: "04",
+        title: "Development",
+        description: "Clean, scalable code. We build robust platforms that perform flawlessly across all devices.",
+        color: "bg-black/40",
     },
 ];
 
@@ -30,63 +35,76 @@ export const Process = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start end", "end start"],
+        offset: ["start start", "end end"],
     });
 
-    const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
     return (
-        <section id="process" className="py-24 bg-zns-dark relative overflow-hidden">
-            <div className="container mx-auto px-4">
-                <motion.h2
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-4xl md:text-6xl font-display font-bold text-white mb-20 text-center"
-                >
-                    How We Work Together
-                </motion.h2>
+        <section ref={containerRef} id="process" className="relative bg-zns-dark">
+            <div className="container mx-auto px-4 py-24 flex flex-col md:flex-row gap-12">
+                {/* Sticky Title */}
+                <div className="md:w-1/3 md:h-screen md:sticky md:top-0 flex flex-col justify-center">
+                    <motion.h2
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        className="text-6xl md:text-8xl font-display font-bold text-white mb-6"
+                    >
+                        THE <br />
+                        <span className="text-zns-mint">PROCESS</span>
+                    </motion.h2>
+                    <p className="text-zns-cream/60 text-lg max-w-sm">
+                        From concept to launch, we follow a proven methodology to ensure success.
+                    </p>
+                </div>
 
-                <div ref={containerRef} className="relative max-w-4xl mx-auto">
-                    {/* Center Line */}
-                    <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2 hidden md:block">
-                        <motion.div
-                            style={{ height: lineHeight }}
-                            className="w-full bg-zns-mint origin-top"
-                        />
-                    </div>
-
-                    <div className="space-y-20">
-                        {steps.map((step, index) => (
-                            <motion.div
+                {/* Cards Stack */}
+                <div className="md:w-2/3 relative">
+                    {steps.map((step, index) => {
+                        const targetScale = 1 - (steps.length - index) * 0.05;
+                        return (
+                            <Card
                                 key={index}
-                                initial={{ opacity: 0, y: 50 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.5, delay: index * 0.2 }}
-                                className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 ${index % 2 === 0 ? "md:flex-row-reverse" : ""
-                                    }`}
-                            >
-                                {/* Content */}
-                                <div className="flex-1 text-center md:text-left">
-                                    <div className="bg-white/5 p-8 rounded-2xl border border-white/10 hover:border-zns-mint/30 transition-colors">
-                                        <h3 className="text-2xl font-bold text-white mb-4">{step.title}</h3>
-                                        <p className="text-zns-cream/70">{step.description}</p>
-                                    </div>
-                                </div>
-
-                                {/* Number Circle */}
-                                <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-full bg-zns-dark border-2 border-zns-mint flex items-center justify-center">
-                                    <span className="text-xl font-bold text-zns-mint">{step.number}</span>
-                                </div>
-
-                                {/* Empty Space for Grid */}
-                                <div className="flex-1 hidden md:block" />
-                            </motion.div>
-                        ))}
-                    </div>
+                                i={index}
+                                {...step}
+                                progress={scrollYProgress}
+                                range={[index * 0.25, 1]}
+                                targetScale={targetScale}
+                            />
+                        );
+                    })}
                 </div>
             </div>
         </section>
+    );
+};
+
+const Card = ({ i, title, description, id, color, progress, range, targetScale }: any) => {
+    const container = useRef(null);
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ["start end", "start start"],
+    });
+
+    const scale = useTransform(progress, range, [1, targetScale]);
+
+    return (
+        <div ref={container} className="h-screen flex items-center justify-center sticky top-0">
+            <motion.div
+                style={{ scale, top: `calc(-5vh + ${i * 25}px)` }}
+                className={`relative flex flex-col h-[500px] w-full rounded-3xl p-12 border border-white/10 ${color} origin-top`}
+            >
+                <BorderBeam lightColor="#14e08e" lightWidth={350} duration={9} delay={i * 1.5} />
+
+                <div className="flex justify-between items-start mb-12">
+                    <h3 className="text-4xl md:text-5xl font-bold text-white">{title}</h3>
+                    <span className="text-6xl font-display font-bold text-white/10">{id}</span>
+                </div>
+
+                <p className="text-xl text-zns-cream/80 max-w-xl leading-relaxed mt-auto">
+                    {description}
+                </p>
+
+                <div className="absolute bottom-8 right-8 w-4 h-4 rounded-full bg-zns-mint animate-pulse" />
+            </motion.div>
+        </div>
     );
 };
