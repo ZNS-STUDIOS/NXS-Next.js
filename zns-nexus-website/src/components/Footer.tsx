@@ -73,11 +73,16 @@ export const Footer = () => {
                 </div>
             </div>
 
-            {/* Background Text */}
-            <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.02]">
-                <h1 className="text-[20vw] font-bold text-white whitespace-nowrap leading-none text-center">
-                    ZNS NEXUS
-                </h1>
+            {/* Scrolling Background Text */}
+            <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none opacity-[0.09]">
+                <div className="flex animate-marquee">
+                    <h1 className="text-[20vw] font-bold text-white whitespace-nowrap leading-none px-8">
+                        ZNS NEXUS • ZNS NEXUS • ZNS NEXUS • ZNS NEXUS • ZNS NEXUS •
+                    </h1>
+                    <h1 className="text-[20vw] font-bold text-white whitespace-nowrap leading-none px-8" aria-hidden="true">
+                        ZNS NEXUS • ZNS NEXUS • ZNS NEXUS • ZNS NEXUS • ZNS NEXUS •
+                    </h1>
+                </div>
             </div>
         </footer>
     );
