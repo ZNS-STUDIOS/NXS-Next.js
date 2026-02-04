@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { Hero } from "@/components/Hero";
+import { TrustBadges } from "@/components/TrustBadges";
 import { MarchingBanner } from "@/components/MarchingBanner";
 import { Services } from "@/components/Services";
 import { Process } from "@/components/Process";
@@ -13,7 +14,7 @@ export default function Home() {
     <main className="min-h-screen bg-zns-dark text-white">
       <Navigation />
       <Hero />
-      <MarchingBanner />
+      <TrustBadges />
       <Services />
       <Process />
       <WhyUs />

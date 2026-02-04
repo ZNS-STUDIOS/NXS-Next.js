@@ -7,19 +7,19 @@ import { Plus, Minus } from "lucide-react";
 const faqs = [
     {
         question: "What types of businesses do you work with?",
-        answer: "We partner with startups launching their first product, established brands looking to scale, and enterprise companies seeking digital transformation. Our solutions are tailored to businesses of all sizes across UAE, Canada, and India.",
+        answer: "We partner with ambitious brands ready to scale. From Series A startups to established enterprises, if you're looking for measurable growth and premium execution, we're the right fit.",
     },
     {
         question: "How long does a typical project take?",
-        answer: "Project timelines vary based on scope. A landing page might take 2-3 weeks, while a full web application could take 8-12 weeks. We'll give you a clear timeline during our discovery phase and keep you updated throughout.",
+        answer: "We move at the speed of business. Most engagements deliver initial value within 2-3 weeks, with full platform launches typically in the 8-12 week range. We provide a detailed sprint schedule before day one.",
     },
     {
         question: "Do you offer ongoing support after launch?",
-        answer: "Absolutely. We believe launch is just the beginning. All projects include post-launch support, and we offer maintenance packages for hosting, updates, security, and optimization. Your success is ongoing, not a one-time event.",
+        answer: "Yes. We don't ship and ghost. Every project includes a 45-day hyper-care period. Beyond that, we offer growth retainers to ensure your digital infrastructure evolves with your business.",
     },
     {
         question: "What makes your pricing different?",
-        answer: "We're transparent and fair. No hidden fees, no surprise costs. You get premium quality without the premium agency markup. We charge based on value delivered, not arbitrary pricing structures.",
+        answer: "We price on value, not hours. You'll receive a fixed-price proposal with clear deliverables and ROI projections. No hidden fees, no scope creep, just transparent investment for tangible results.",
     },
 ];
 
@@ -27,16 +27,23 @@ export const FAQ = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     return (
-        <section id="faq" className="py-24 bg-zns-dark relative z-10">
+        <section id="faq" className="py-24 bg-zns-dark relative z-10 border-t border-white/5">
             <div className="container mx-auto px-4 max-w-3xl">
-                <motion.h2
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-4xl md:text-6xl font-display font-bold text-white mb-16 text-center"
-                >
-                    Common Questions
-                </motion.h2>
+                {/* Header */}
+                <div className="mb-16 text-center flex flex-col items-center">
+                    <div className="mb-4 flex flex-col items-center gap-2">
+                        <div className="h-8 w-[1px] bg-zns-gold/50" />
+                        <span className="text-zns-gold font-mono text-[10px] tracking-[0.2em] uppercase">FAQ</span>
+                    </div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-4xl md:text-6xl font-display font-bold text-white"
+                    >
+                        Common <span className="text-zns-gold">Questions</span>
+                    </motion.h2>
+                </div>
 
                 <div className="space-y-4">
                     {faqs.map((faq, index) => (
@@ -54,9 +61,9 @@ export const FAQ = () => {
                             >
                                 <span className="text-lg font-bold text-white">{faq.question}</span>
                                 {openIndex === index ? (
-                                    <Minus className="w-5 h-5 text-zns-mint" />
+                                    <Minus className="w-5 h-5 text-zns-gold" />
                                 ) : (
-                                    <Plus className="w-5 h-5 text-zns-mint" />
+                                    <Plus className="w-5 h-5 text-zns-gold" />
                                 )}
                             </button>
                             <AnimatePresence>

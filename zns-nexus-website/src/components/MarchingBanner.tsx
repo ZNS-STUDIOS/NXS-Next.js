@@ -7,7 +7,7 @@ const items = ["STRATEGY", "DESIGN", "DEVELOPMENT", "GROWTH"];
 
 export const MarchingBanner = () => {
     return (
-        <div className="relative flex h-[20vh] overflow-hidden bg-zns-cream items-center border-y border-zns-gold/20">
+        <div className="relative flex h-[20vh] overflow-hidden items-center border-b border-zns-gold/20">
             <div className="flex whitespace-nowrap">
                 <motion.div
                     animate={{ x: [0, -2000] }}
@@ -23,7 +23,7 @@ export const MarchingBanner = () => {
                             key={index}
                             className="inline-block mx-8 text-8xl md:text-9xl font-display font-bold"
                             style={{
-                                WebkitTextStroke: '1px rgba(180, 83, 9, 0.8)', // zns-gold
+                                WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)',
                                 color: 'transparent',
                             }}
                         >
@@ -35,7 +35,7 @@ export const MarchingBanner = () => {
                             key={`dup-${index}`}
                             className="inline-block mx-8 text-8xl md:text-9xl font-display font-bold"
                             style={{
-                                WebkitTextStroke: '1px rgba(180, 83, 9, 0.8)', // zns-gold
+                                WebkitTextStroke: '1px rgba(255, 255, 255, 0.1)',
                                 color: 'transparent',
                             }}
                         >

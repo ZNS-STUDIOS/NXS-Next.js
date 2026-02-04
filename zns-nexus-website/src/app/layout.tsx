@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
-import { Outfit, Cormorant_Garamond } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "lenis/react";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
 });
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -37,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${outfit.variable} ${cormorant.variable} antialiased bg-zns-dark text-zns-cream selection:bg-zns-mint selection:text-zns-dark`}
+        className={`${jakarta.variable} ${inter.variable} ${mono.variable} antialiased bg-zns-dark text-zns-cream selection:bg-zns-gold selection:text-white`}
       >
         <ReactLenis root>
           <CustomCursor />

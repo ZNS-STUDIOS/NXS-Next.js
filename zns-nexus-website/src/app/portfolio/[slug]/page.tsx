@@ -91,42 +91,66 @@ export default function CaseStudyPage({ params }: PageProps) {
 
             {/* Content Sections */}
             <section className="container mx-auto px-4 mb-20">
-                <div className="max-w-4xl mx-auto space-y-16">
+                <div className="max-w-4xl mx-auto space-y-20">
                     {/* Overview */}
                     <div>
-                        <h2 className="font-display font-bold text-3xl text-white mb-4">Overview</h2>
-                        <p className="text-zns-cream/70 text-lg leading-relaxed">
+                        <h2 className="font-display font-bold text-3xl text-white mb-6">Overview</h2>
+                        <p className="text-zns-cream/80 text-lg leading-relaxed">
                             {study.shortDescription}
                         </p>
                     </div>
 
-                    {/* Challenge */}
-                    <div>
-                        <h2 className="font-display font-bold text-3xl text-white mb-4">The Challenge</h2>
-                        <p className="text-zns-cream/70 text-lg leading-relaxed">
-                            {study.challenge}
-                        </p>
+                    {/* Challenge & Solution Grid */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div>
+                            <h2 className="font-display font-bold text-2xl text-white mb-4">The Challenge</h2>
+                            <p className="text-zns-cream/70 text-lg leading-relaxed">
+                                {study.challenge}
+                            </p>
+                        </div>
+                        <div>
+                            <h2 className="font-display font-bold text-2xl text-white mb-4">Our Solution</h2>
+                            <p className="text-zns-cream/70 text-lg leading-relaxed">
+                                {study.solution}
+                            </p>
+                        </div>
                     </div>
 
-                    {/* Solution */}
+                    {/* Process Steps */}
                     <div>
-                        <h2 className="font-display font-bold text-3xl text-white mb-4">Our Solution</h2>
-                        <p className="text-zns-cream/70 text-lg leading-relaxed">
-                            {study.solution}
+                        <h2 className="font-display font-bold text-3xl text-white mb-8">Process</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            {study.process.map((step, index) => (
+                                <div key={index} className="p-6 rounded-sm border border-white/5 bg-white/[0.02]">
+                                    <div className="text-zns-gold font-mono text-xs uppercase tracking-widest mb-3">
+                                        Phase 0{index + 1}
+                                    </div>
+                                    <h4 className="font-bold text-lg text-white mb-2">{step.title}</h4>
+                                    <p className="text-zns-cream/60 text-sm leading-relaxed">{step.description}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Impact Statement */}
+                    <div className="p-8 md:p-12 rounded-sm border border-zns-gold/20 bg-zns-gold/5">
+                        <h3 className="text-zns-gold font-mono text-sm uppercase tracking-widest mb-4">Business Impact</h3>
+                        <p className="text-2xl md:text-3xl font-display font-bold text-white leading-tight">
+                            &ldquo;{study.impact}&rdquo;
                         </p>
                     </div>
 
                     {/* Results */}
                     <div>
-                        <h2 className="font-display font-bold text-3xl text-white mb-6">Results</h2>
+                        <h2 className="font-display font-bold text-3xl text-white mb-6">Key Results</h2>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             {study.results.map((result, index) => (
                                 <div
                                     key={index}
-                                    className="p-6 rounded-2xl bg-white/5 border border-white/10"
+                                    className="p-6 rounded-sm bg-white/5 border border-white/10"
                                 >
-                                    <div className="text-4xl font-bold text-zns-mint mb-2">✓</div>
-                                    <p className="text-white font-semibold">{result}</p>
+                                    <div className="text-3xl font-bold text-zns-gold mb-2">✓</div>
+                                    <p className="text-white font-medium">{result}</p>
                                 </div>
                             ))}
                         </div>
@@ -134,13 +158,13 @@ export default function CaseStudyPage({ params }: PageProps) {
 
                     {/* Testimonial */}
                     {study.testimonial && (
-                        <div className="p-8 rounded-3xl bg-gradient-to-br from-zns-mint/10 to-zns-teal/5 border border-zns-mint/20">
-                            <blockquote className="text-white text-xl italic mb-6">
+                        <div className="p-8 rounded-sm bg-gradient-to-br from-white/10 to-transparent border border-white/10">
+                            <blockquote className="text-white text-xl italic mb-6 leading-relaxed">
                                 &ldquo;{study.testimonial.quote}&rdquo;
                             </blockquote>
                             <div>
-                                <p className="text-white font-semibold">{study.testimonial.author}</p>
-                                <p className="text-zns-cream/60">{study.testimonial.role}</p>
+                                <p className="text-white font-bold text-lg">{study.testimonial.author}</p>
+                                <p className="text-zns-gold text-sm">{study.testimonial.role}</p>
                             </div>
                         </div>
                     )}

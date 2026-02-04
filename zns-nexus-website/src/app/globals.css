@@ -17,11 +17,13 @@
   --color-zns-text-light: #57534e;
   /* Stone 600 for secondary text */
 
-  --font-sans: var(--font-outfit);
-  --font-display: var(--font-cormorant);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-jakarta);
+  --font-mono: var(--font-mono);
 
   --animate-spin-slow: spin 8s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
+  --animate-float-fast: float 4s ease-in-out infinite;
 
   @keyframes float {
 
@@ -68,13 +70,30 @@
     text-wrap: balance;
   }
 
-  .glass-panel {
-    @apply bg-white/60 backdrop-blur-md border border-black/5 shadow-xl;
+  /* Zero-G Navigation Style */
+  .zero-g-nav {
+    @apply bg-zns-cream/10 backdrop-blur-[20px] border border-white/5 shadow-lg shadow-black/5;
   }
 
-  .glass-liquid {
-    @apply bg-white/5 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_#1f26875e] backdrop-saturate-150;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+  /* Ghost Card Style */
+  .ghost-card {
+    @apply border border-white/5 bg-white/[0.02] backdrop-blur-sm rounded-sm transition-all duration-500 ease-out;
+  }
+
+  .ghost-card:hover {
+    @apply -translate-y-2 border-zns-gold/20 bg-white/[0.04] shadow-2xl shadow-zns-gold/5;
+  }
+
+  /* Precision Divider */
+  .precision-divider {
+    @apply h-[0.5px] w-full bg-zns-text-light/20;
+  }
+
+  /* Technical Grid Background */
+  .tech-grid {
+    background-size: 40px 40px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
   }
 
   .scrollbar-hide::-webkit-scrollbar {
@@ -93,10 +112,10 @@
 }
 
 body {
-  background: radial-gradient(circle at 50% -20%, #ffffff 0%, #fdfbf7 40%, #f5f5f4 100%);
+  background: radial-gradient(circle at 50% -20%, #171717 0%, #0a0a0a 100%);
   background-attachment: fixed;
-  color: var(--color-zns-dark);
-  font-family: var(--font-outfit), sans-serif;
+  color: var(--color-zns-cream);
+  font-family: var(--font-sans), sans-serif;
   overflow-x: hidden;
 }
 
