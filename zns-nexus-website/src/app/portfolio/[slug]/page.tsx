@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { caseStudies, getCaseStudyBySlug } from "@/data/case-studies";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface PageProps {
     params: { slug: string };
@@ -136,7 +136,7 @@ export default function CaseStudyPage({ params }: PageProps) {
                     {study.testimonial && (
                         <div className="p-8 rounded-3xl bg-gradient-to-br from-zns-mint/10 to-zns-teal/5 border border-zns-mint/20">
                             <blockquote className="text-white text-xl italic mb-6">
-                                "{study.testimonial.quote}"
+                                &ldquo;{study.testimonial.quote}&rdquo;
                             </blockquote>
                             <div>
                                 <p className="text-white font-semibold">{study.testimonial.author}</p>

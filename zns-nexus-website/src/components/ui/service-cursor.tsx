@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
@@ -8,7 +8,6 @@ interface ServiceCursorProps {
     hoveredService: {
         title: string;
         caseStudySlug: string;
-        color: string;
     } | null;
 }
 

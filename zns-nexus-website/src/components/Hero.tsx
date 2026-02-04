@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { MagneticButton } from "@/components/ui/magnetic-button";
-import { HyperspaceBackground } from "@/components/ui/hyperspace-background";
+import { PrismBackground } from "@/components/ui/prism-background";
 
 export const Hero = () => {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -15,16 +15,9 @@ export const Hero = () => {
     const opacity = useTransform(scrollY, [0, 500], [1, 0]);
 
     return (
-        <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-zns-dark">
-            {/* Hyperspace Background */}
-            <HyperspaceBackground />
-
-            {/* Fluid Background */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-[-20%] left-[-10%] w-[70vw] h-[70vw] bg-zns-teal/20 rounded-full blur-[120px] animate-pulse" />
-                <div className="absolute bottom-[-20%] right-[-10%] w-[70vw] h-[70vw] bg-zns-mint/10 rounded-full blur-[120px] animate-pulse delay-1000" />
-                <div className="absolute top-[40%] left-[30%] w-[40vw] h-[40vw] bg-purple-500/10 rounded-full blur-[100px] animate-pulse delay-2000" />
-            </div>
+        <section ref={containerRef} className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-zns-cream">
+            {/* Prism Gradient Background */}
+            <PrismBackground />
 
             {/* Content */}
             <motion.div
@@ -36,11 +29,11 @@ export const Hero = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
-                    className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zns-mint/30 bg-zns-mint/5 backdrop-blur-sm"
+                    className="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zns-gold/40 bg-white/50 backdrop-blur-md shadow-lg shadow-zns-gold/10"
                 >
-                    <div className="w-2 h-2 rounded-full bg-zns-mint animate-pulse" />
-                    <span className="text-zns-mint text-sm font-bold tracking-widest uppercase">Connecting Dots</span>
-                    <div className="w-2 h-2 rounded-full bg-zns-mint animate-pulse" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-zns-gold" />
+                    <span className="text-zns-gold text-xs font-bold tracking-[0.2em] uppercase">The Art of Restoration</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-zns-gold" />
                 </motion.div>
 
                 <motion.div
@@ -49,10 +42,10 @@ export const Hero = () => {
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="mb-12"
                 >
-                    <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-2 tracking-wide">
+                    <h2 className="text-4xl md:text-6xl font-display font-bold text-zns-dark mb-2 tracking-wide">
                         THE BRIDGE BETWEEN
                     </h2>
-                    <h1 className="text-[12vw] md:text-[10vw] leading-[0.85] font-sans font-bold tracking-tighter text-zns-mint">
+                    <h1 className="text-[12vw] md:text-[10vw] leading-[0.85] font-sans font-bold tracking-tighter text-zns-blue">
                         <span className="block">AMBITION &</span>
                         <span className="block">EXECUTION</span>
                     </h1>
@@ -64,7 +57,7 @@ export const Hero = () => {
                     transition={{ delay: 0.6, duration: 0.5 }}
                 >
                     <Link href="/contact">
-                        <MagneticButton className="px-12 py-6 bg-zns-mint text-zns-dark rounded-full font-bold text-xl hover:bg-white transition-colors flex items-center gap-2 group shadow-[0_0_30px_rgba(20,224,142,0.3)]">
+                        <MagneticButton className="px-12 py-6 bg-zns-blue text-white rounded-full font-bold text-xl hover:bg-zns-dark hover:text-white transition-colors flex items-center gap-2 group shadow-[0_0_30px_rgba(30,58,138,0.2)]">
                             GET MATCHED
                             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
                         </MagneticButton>
@@ -79,8 +72,8 @@ export const Hero = () => {
                 transition={{ delay: 1.5, duration: 1 }}
                 className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
             >
-                <span className="text-xs uppercase tracking-[0.2em] text-zns-cream/40">Scroll</span>
-                <div className="w-[1px] h-12 bg-gradient-to-b from-zns-mint to-transparent" />
+                <span className="text-xs uppercase tracking-[0.2em] text-zns-text-light">Scroll</span>
+                <div className="w-[1px] h-12 bg-gradient-to-b from-zns-gold to-transparent" />
             </motion.div>
         </section>
     );

@@ -1,9 +1,8 @@
+import { Navigation } from "@/components/Navigation";
 import { Metadata } from "next";
 import { caseStudies } from "@/data/case-studies";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 
 export const metadata: Metadata = {
     title: "Portfolio | ZNS Nexus",
@@ -14,27 +13,32 @@ export default function PortfolioPage() {
     const categories = Array.from(new Set(caseStudies.map(study => study.category)));
 
     return (
-        <main className="min-h-screen bg-zns-dark text-white pt-24 pb-20">
+        <main className="min-h-screen bg-zns-cream text-zns-dark pt-24 pb-20">
+            <Navigation />
             <div className="container mx-auto px-4">
-                {/* Header */}
-                <div className="max-w-4xl mx-auto text-center mb-16">
-                    <h1 className="font-display font-bold text-6xl md:text-8xl text-white mb-6">
-                        Our <span className="text-zns-mint">Work</span>
+                {/* Main Header / Hero */}
+                <div className="max-w-5xl mx-auto text-center mb-24 pt-10">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zns-gold/30 bg-white/50 backdrop-blur-sm mb-6 shadow-sm">
+                        <span className="w-1.5 h-1.5 rounded-full bg-zns-gold animate-pulse" />
+                        <span className="text-zns-gold text-xs font-bold tracking-[0.2em] uppercase">Selected Works</span>
+                    </div>
+
+                    <h1 className="font-display font-medium text-7xl md:text-9xl text-zns-dark mb-8 tracking-tight">
+                        Our <span className="text-zns-blue italic">Craft</span>
                     </h1>
-                    <p className="text-zns-cream/70 text-xl">
-                        Explore our portfolio of successful projects that have driven real results for our clients
+                    <p className="text-zns-text-light text-xl md:text-2xl max-w-2xl mx-auto font-light leading-relaxed">
+                        A curated collection of digital experiences built on <span className="text-zns-dark font-medium">trust</span> and <span className="text-zns-dark font-medium">precision</span>.
                     </p>
                 </div>
 
-                {/* Category Filter - Can be interactive in future */}
-                <div className="flex justify-center gap-4 mb-16 flex-wrap">
-                    <button className="px-6 py-2 rounded-full bg-zns-mint text-zns-dark font-semibold hover:bg-white transition-colors">
+                <div className="flex justify-center gap-4 mb-20 flex-wrap">
+                    <button className="px-8 py-3 rounded-full bg-zns-dark text-white font-medium hover:bg-zns-blue transition-colors text-sm tracking-wide shadow-lg shadow-zns-dark/10">
                         All Projects
                     </button>
                     {categories.map((category) => (
                         <button
                             key={category}
-                            className="px-6 py-2 rounded-full border border-white/20 text-white hover:border-zns-mint hover:text-zns-mint transition-colors"
+                            className="px-8 py-3 rounded-full border border-black/5 bg-white text-zns-text-light hover:border-zns-gold/50 hover:text-zns-gold transition-colors text-sm tracking-wide shadow-sm"
                         >
                             {category}
                         </button>
@@ -49,43 +53,43 @@ export default function PortfolioPage() {
                             href={`/portfolio/${study.slug}`}
                             className="group block"
                         >
-                            <article className="relative h-[500px] rounded-3xl overflow-hidden bg-white/5 border border-white/10 hover:border-zns-mint/50 transition-all duration-500">
+                            <article className="relative h-[500px] rounded-3xl overflow-hidden bg-white border border-black/5 hover:border-zns-gold/30 hover:shadow-2xl hover:shadow-zns-gold/10 transition-all duration-500 shadow-lg shadow-black/5">
                                 {/* Thumbnail Background */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-zns-teal/20 to-zns-mint/10">
+                                <div className="absolute inset-0 bg-gradient-to-br from-zns-blue/5 to-zns-gold/5">
                                     {/* Placeholder for image - would use Next Image with real images */}
-                                    <div className="w-full h-full flex items-center justify-center text-zns-mint/30 text-6xl font-bold">
+                                    <div className="w-full h-full flex items-center justify-center text-zns-dark/10 text-6xl font-bold font-display uppercase tracking-tighter">
                                         {study.category}
                                     </div>
                                 </div>
 
-                                {/* Gradient Overlay */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-zns-dark via-zns-dark/50 to-transparent" />
+                                {/* Gradient Overlay - Light Mode: White to Transparent */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-transparent" />
 
                                 {/* Content */}
                                 <div className="relative h-full p-8 flex flex-col justify-end">
                                     <div className="mb-3 flex items-center gap-3">
-                                        <span className="px-3 py-1 rounded-full bg-zns-mint/20 text-zns-mint text-sm font-semibold">
+                                        <span className="px-3 py-1 rounded-full bg-zns-blue/10 text-zns-blue text-sm font-semibold border border-zns-blue/10">
                                             {study.category}
                                         </span>
-                                        <span className="text-zns-cream/60 text-sm">{study.year}</span>
+                                        <span className="text-zns-text-light text-sm">{study.year}</span>
                                     </div>
 
-                                    <h2 className="font-display font-bold text-3xl text-white mb-3 group-hover:text-zns-mint transition-colors">
+                                    <h2 className="font-display font-bold text-3xl text-zns-dark mb-3 group-hover:text-zns-blue transition-colors">
                                         {study.title}
                                     </h2>
 
-                                    <p className="text-zns-cream/70 mb-4 line-clamp-2">
+                                    <p className="text-zns-text-light mb-4 line-clamp-2">
                                         {study.shortDescription}
                                     </p>
 
-                                    <div className="flex items-center text-zns-mint font-semibold group-hover:gap-3 transition-all">
+                                    <div className="flex items-center text-zns-gold font-semibold group-hover:gap-3 transition-all">
                                         View Case Study
                                         <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                                     </div>
                                 </div>
 
                                 {/* Hover Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-zns-mint/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                <div className="absolute inset-0 bg-gradient-to-br from-zns-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                             </article>
                         </Link>
                     ))}

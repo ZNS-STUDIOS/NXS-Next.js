@@ -2,8 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Zap, Users, Sparkles, TrendingUp, Award, Wallet } from "lucide-react";
-import { BorderBeam } from "@/components/ui/border-beam";
+import { Zap, Users, Sparkles, TrendingUp, Wallet } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const features = [
@@ -41,19 +40,19 @@ const features = [
 
 export const WhyUs = () => {
     return (
-        <section id="why-us" className="py-24 bg-zns-dark relative">
+        <section id="why-us" className="py-24 bg-zns-cream relative">
             <div className="container mx-auto px-4">
                 <div className="mb-16 text-center">
                     <motion.h2
                         initial={{ opacity: 0, y: 50 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-5xl md:text-7xl font-display font-bold text-white mb-6"
+                        className="text-5xl md:text-7xl font-display font-bold text-zns-dark mb-6"
                     >
-                        WHY <span className="text-zns-mint">NEXUS?</span>
+                        WHY <span className="text-zns-blue">NEXUS?</span>
                     </motion.h2>
-                    <p className="text-xl text-zns-cream/60 max-w-2xl mx-auto">
-                        We don't just build digital products. We build digital legacies.
+                    <p className="text-xl text-zns-text-light max-w-2xl mx-auto">
+                        We don&apos;t just build digital products. We build digital legacies.
                     </p>
                 </div>
 
@@ -66,20 +65,19 @@ export const WhyUs = () => {
                             viewport={{ once: true }}
                             transition={{ delay: index * 0.1 }}
                             className={cn(
-                                "group relative p-8 rounded-3xl border border-white/10 overflow-hidden hover:border-zns-mint/30 transition-colors duration-500 min-h-[250px] flex flex-col justify-between",
+                                "group relative p-8 rounded-3xl border border-black/5 bg-white shadow-xl shadow-black/5 overflow-hidden hover:border-zns-gold/20 hover:shadow-2xl hover:shadow-zns-gold/10 transition-all duration-500 min-h-[250px] flex flex-col justify-between",
                                 feature.className
                             )}
                         >
-                            <BorderBeam lightColor="#14e08e" lightWidth={350} duration={8} />
-                            <div className="absolute inset-0 bg-[#0a0a0a] -z-10" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-zns-gold/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                             <div className="relative z-10">
-                                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                                    <feature.icon className="w-6 h-6 text-white" />
+                                <div className="w-12 h-12 rounded-full bg-black/5 border border-black/5 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:border-zns-gold/30 transition-all duration-300">
+                                    <feature.icon className="w-6 h-6 text-zns-dark group-hover:text-zns-gold transition-colors" />
                                 </div>
 
-                                <h3 className="text-2xl md:text-3xl font-display font-bold text-white mb-3">{feature.title}</h3>
-                                <p className="text-zns-cream/60 group-hover:text-zns-cream/90 transition-colors text-lg">{feature.description}</p>
+                                <h3 className="text-2xl md:text-3xl font-display font-bold text-zns-dark mb-3">{feature.title}</h3>
+                                <p className="text-zns-text-light group-hover:text-zns-dark transition-colors text-lg">{feature.description}</p>
                             </div>
                         </motion.div>
                     ))}
