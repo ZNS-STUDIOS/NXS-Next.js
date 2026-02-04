@@ -82,9 +82,6 @@ export const Hero = () => {
                 <span className="text-xs uppercase tracking-[0.2em] text-zns-cream/40">Scroll</span>
                 <div className="w-[1px] h-12 bg-gradient-to-b from-zns-mint to-transparent" />
             </motion.div>
-
-            {/* Liquid Glass Overlay */}
-            <div className="absolute inset-0 pointer-events-none bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
         </section>
     );
 };
