@@ -41,10 +41,10 @@ export const Hero = () => {
                     transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="mb-12 relative"
                 >
-                    <h1 className="text-[10vw] md:text-[8vw] leading-[0.9] font-display font-bold tracking-tighter text-white">
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">WE BUILD</span>
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60">PRODUCTS THAT</span>
-                        <span className="block text-zns-gold">SCALE</span>
+                    <h1 className="text-5xl md:text-7xl leading-[1.1] font-display font-bold tracking-tight text-white">
+                        <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">ENGINEERING</span>
+                        <span className="block text-transparent bg-clip-text bg-gradient-to-b from-white to-white/60 drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">DIGITAL</span>
+                        <span className="block text-zns-gold drop-shadow-[0_0_20px_rgba(180,83,9,0.6)]">EXCELLENCE</span>
                     </h1>
                 </motion.div>
 
@@ -63,10 +63,10 @@ export const Hero = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.6, duration: 0.5 }}
-                    className="flex flex-col md:flex-row gap-6 items-center"
+                    className="flex flex-col md:flex-row gap-24 items-center"
                 >
                     <Link href="/contact">
-                        <MagneticButton className="px-8 py-4 bg-zns-gold text-white border border-zns-gold rounded-sm font-bold font-mono text-sm hover:bg-white hover:text-zns-dark transition-all flex items-center gap-3 tracking-widest uppercase shadow-[0_0_20px_rgba(180,83,9,0.2)]">
+                        <MagneticButton className="px-8 py-4 bg-zns-gold text-white border border-zns-gold rounded-sm font-bold font-mono text-sm hover:bg-white hover:text-[#0a0a0a] transition-all flex items-center gap-3 tracking-widest uppercase shadow-[0_0_20px_rgba(180,83,9,0.2)]">
                             Start Your Project
                             <ArrowRight className="w-4 h-4" />
                         </MagneticButton>

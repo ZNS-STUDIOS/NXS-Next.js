@@ -44,7 +44,7 @@ export const Services = () => {
     const router = useRouter();
 
     return (
-        <section id="services" className="py-24 bg-zns-dark relative overflow-hidden border-t border-white/5">
+        <section id="services" className="py-24 bg-zns-dark relative border-t border-white/5">
             <div className="container mx-auto px-4">
 
                 {/* Header */}
@@ -56,47 +56,46 @@ export const Services = () => {
                     </h2>
                 </div>
 
-                {/* 2x2 Grid Layout */}
+                {/* 2x2 Grid Layout - Fixed Dimensions */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                     {services.map((service, index) => {
                         const Icon = service.icon;
                         return (
-                            <motion.div
+                            <div
                                 key={service.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="group relative bg-white/5 border border-white/10 p-8 md:p-12 rounded-sm cursor-pointer hover:bg-white/10 transition-colors duration-500 overflow-hidden"
+                                className="group relative bg-white/5 border border-white/10 h-[400px] w-full rounded-sm cursor-pointer hover:bg-white/10 transition-colors duration-500 overflow-hidden"
                                 onClick={() => router.push(`/portfolio/${service.caseStudySlug}`)}
                             >
                                 {/* Hover Gradient */}
                                 <div className="absolute inset-0 bg-gradient-to-br from-zns-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                                <div className="relative z-10 flex flex-col h-full justify-between gap-8">
-                                    <div>
-                                        <div className="flex justify-between items-start mb-6">
-                                            <div className="p-4 bg-white/5 rounded-sm text-zns-gold group-hover:scale-110 transition-transform duration-500">
-                                                <Icon className="w-8 h-8" />
-                                            </div>
-                                            <span className="font-mono text-white/30 text-sm tracking-widest">0{index + 1}</span>
-                                        </div>
+                                <div className="relative z-10 flex flex-col h-full p-8 md:p-10">
 
-                                        <h3 className="text-3xl font-display font-bold text-white mb-2 group-hover:translate-x-2 transition-transform duration-300">
+                                    {/* Top Section: Icon & Header - Tight Spacing */}
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div className="p-3 bg-white/5 rounded-sm text-zns-gold group-hover:scale-110 transition-transform duration-500 border border-white/5">
+                                            <Icon className="w-6 h-6" />
+                                        </div>
+                                        <span className="font-mono text-white/20 text-xs tracking-widest">0{index + 1}</span>
+                                    </div>
+
+                                    {/* Middle Section: Title & Description */}
+                                    <div className="flex-grow flex flex-col pt-0 relative">
+                                        <h3 className="text-2xl font-display font-bold text-white mb-3 group-hover:translate-x-1 transition-transform duration-300 transform-gpu">
                                             {service.title}
                                         </h3>
 
-                                        {/* Hover Reveal: Description */}
-                                        <div className="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 overflow-hidden transition-all duration-500 ease-in-out">
-                                            <p className="text-zns-text-light text-base leading-relaxed max-w-sm group-hover:text-white/90 transition-colors pt-2">
+                                        {/* Description */}
+                                        <div className="relative w-full">
+                                            <p className="text-white/80 text-lg leading-relaxed max-w-sm absolute top-0 left-0 transition-all duration-500 ease-in-out opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0">
                                                 {service.description}
                                             </p>
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center justify-between pt-6 border-t border-white/10 group-hover:border-white/20 transition-colors">
-                                        {/* Hover Reveal: Metric */}
-                                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-500 text-zns-gold font-mono text-xs uppercase tracking-widest">
+                                    {/* Bottom Section: Metrics & CTA - Pinned to bottom */}
+                                    <div className="mt-auto flex items-center justify-between pt-6 border-t border-white/10 group-hover:border-white/20 transition-colors">
+                                        <div className="text-zns-gold font-mono text-[10px] uppercase tracking-widest transition-opacity duration-500 group-hover:opacity-100 opacity-60">
                                             ✓ {service.metric}
                                         </div>
                                         <div className="flex items-center gap-2 text-white font-mono text-[10px] uppercase tracking-widest opacity-60 group-hover:opacity-100 transition-opacity">
@@ -105,7 +104,7 @@ export const Services = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </motion.div>
+                            </div>
                         )
                     })}
                 </div>

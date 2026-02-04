@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useCallback, useState } from "react";
-import useEmblaCarousel from "embla-carousel-react";
+import React from "react";
+import { motion } from "framer-motion"; // Added import
 import { Zap, Users, Sparkles, TrendingUp, Wallet } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -39,106 +39,88 @@ const features = [
 ];
 
 export const WhyUs = () => {
-    // Standard Embla setup
-    const [emblaRef, emblaApi] = useEmblaCarousel({
-        align: "start",
-        loop: true,
-        dragFree: true,
-        containScroll: "trimSnaps"
-    });
-
-    const [isHovered, setIsHovered] = useState(false);
-    const [isDragging, setIsDragging] = useState(false);
-
-    // Track dragging state via Embla events
-    useEffect(() => {
-        if (!emblaApi) return;
-
-        const onPointerDown = () => setIsDragging(true);
-        const onPointerUp = () => setIsDragging(false);
-        // Embla 8.x events
-        emblaApi.on("pointerDown", onPointerDown);
-        emblaApi.on("pointerUp", onPointerUp);
-
-        return () => {
-            emblaApi.off("pointerDown", onPointerDown);
-            emblaApi.off("pointerUp", onPointerUp);
-        };
-    }, [emblaApi]);
-
-    // Standard Interval Autoplay
-    useEffect(() => {
-        if (!emblaApi) return;
-
-        const autoplay = setInterval(() => {
-            // Only scroll if not hovered and not manually interacting (dragging)
-            if (!isHovered && !isDragging) {
-                emblaApi.scrollNext();
-            }
-        }, 3000); // 3 seconds per slide
-
-        return () => clearInterval(autoplay);
-    }, [emblaApi, isHovered, isDragging]);
-
     return (
         <section
             id="why-us"
             className="py-24 bg-zns-dark relative border-t border-white/5 overflow-hidden"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
         >
             {/* Background Grid */}
             <div className="absolute inset-0 tech-grid opacity-20 pointer-events-none" />
 
+            {/* Header Section */}
             <div className="container mx-auto px-4 mb-16">
-                <div className="flex flex-col items-start gap-2 mb-4">
-                    <div className="h-8 w-[1px] bg-zns-gold/50" />
-                    <span className="text-zns-gold font-mono text-[10px] tracking-[0.2em] uppercase">Core Values</span>
+                <div className="flex flex-col items-start gap-4">
+                    <div>
+                        <div className="flex items-center gap-2 mb-2">
+                            <div className="h-[1px] w-8 bg-zns-gold/50" />
+                            <span className="text-zns-gold font-mono text-[10px] tracking-[0.2em] uppercase">Core Values</span>
+                        </div>
+                        <h2 className="text-5xl md:text-6xl font-display font-bold text-white uppercase tracking-tight leading-none mb-4">
+                            WHY ZNS <span className="text-white/20">NEXUS?</span>
+                        </h2>
+                    </div>
+                    {/* New Subheading */}
+                    <p className="text-white/80 text-lg font-light tracking-wide max-w-xl border-l-2 border-white/10 pl-4 py-1"> {/* Increased brightness */}
+                        The principles that guide how we work and deliver results.
+                    </p>
                 </div>
-                <h2 className="text-5xl md:text-7xl font-display font-bold text-white uppercase tracking-tight leading-none">
-                    WHY ZNS <span className="text-white/20">NEXUS?</span>
-                </h2>
             </div>
 
-            {/* Embla Carousel Viewport */}
-            <div className="overflow-hidden cursor-grab active:cursor-grabbing" ref={emblaRef}>
-                <div className="flex gap-6 select-none touch-pan-y">
+            {/* Static Grid Layout - Dense & Intentional */}
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {features.map((feature, index) => {
                         const Icon = feature.icon;
                         return (
-                            <div key={index} className="flex-[0_0_350px] md:flex-[0_0_400px] min-w-0">
+                            <motion.div // Switched to motion.div
+                                key={index}
+                                className="w-full"
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: "-50px" }}
+                                transition={{ duration: 0.5, delay: index * 0.1 }}
+                            >
                                 <div className={cn(
-                                    "relative h-[400px] p-8 md:p-10 rounded-sm border border-white/10 flex flex-col justify-between overflow-hidden group bg-white/[0.02]",
-                                    "hover:border-white/20 transition-all duration-300 hover:bg-white/[0.05]"
+                                    "relative group h-full min-h-[220px] p-8",
+                                    "bg-white/[0.02] border border-white/5",
+                                    "hover:bg-white/[0.04] hover:border-white/10 hover:-translate-y-[2px]",
+                                    "transition-all duration-300 ease-out",
+                                    "rounded-sm overflow-hidden"
                                 )}>
+
                                     {/* Gradient Background - Reveals on Hover */}
                                     <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
-                                    <div className="relative z-10">
-                                        <div className="text-white/20 font-mono text-xl mb-6">0{index + 1}</div>
-                                        <div className="w-12 h-12 bg-white/5 rounded-sm flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/5">
-                                            <Icon className="w-6 h-6" />
-                                        </div>
+                                    {/* Number - De-emphasized Bottom Right */}
+                                    <div className="absolute bottom-4 right-4 text-[40px] font-display font-bold text-white/[0.03] leading-none select-none pointer-events-none group-hover:text-white/[0.05] transition-colors">
+                                        0{index + 1}
                                     </div>
 
-                                    <div className="relative z-10">
-                                        <h3 className="text-2xl font-display font-bold text-white mb-3">{feature.title}</h3>
-                                        <p className="text-zns-text-light text-sm leading-relaxed group-hover:text-white transition-colors">
-                                            {feature.description}
-                                        </p>
+                                    <div className="relative z-10 flex flex-col items-start h-full">
+                                        {/* Icon - Containerized & Smaller */}
+                                        <div className="mb-5 p-3 rounded-sm bg-white/5 border border-white/5 text-zns-gold group-hover:text-white group-hover:bg-zns-gold/10 transition-colors">
+                                            <Icon className="w-5 h-5" />
+                                        </div>
+
+                                        {/* Content - Packed Top */}
+                                        <div className="flex flex-col gap-3">
+                                            <h3 className="text-xl font-display font-bold text-white tracking-wide group-hover:text-zns-mint transition-colors">
+                                                {feature.title}
+                                            </h3>
+
+                                            {/* Micro-accent line */}
+                                            <div className="w-8 h-[1px] bg-white/10 group-hover:bg-white/20 transition-colors" />
+
+                                            <p className="text-white/70 text-sm leading-relaxed font-sans max-w-[90%]"> {/* Increased brightness from light/60 to white/70 */}
+                                                {feature.description}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </motion.div>
                         )
                     })}
                 </div>
-            </div>
-
-            {/* Scroll Hint */}
-            <div className="container mx-auto px-4 mt-8 flex justify-end">
-                <span className="text-[10px] font-mono uppercase tracking-widest text-white/30 animate-pulse">
-                    Drag or Wait to Explore
-                </span>
             </div>
         </section>
     );

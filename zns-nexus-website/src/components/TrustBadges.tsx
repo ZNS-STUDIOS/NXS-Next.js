@@ -21,8 +21,8 @@ const stats = [
 export const TrustBadges = () => {
     return (
         <section className="py-16 bg-zns-dark border-t border-white/5 overflow-hidden">
+            {/* Stats Row - Centered in Container */}
             <div className="container mx-auto px-4">
-                {/* Stats Row */}
                 <div className="flex justify-center gap-12 md:gap-24 mb-12">
                     {stats.map((stat, index) => (
                         <motion.div
@@ -42,35 +42,36 @@ export const TrustBadges = () => {
                         </motion.div>
                     ))}
                 </div>
+            </div>
 
-                {/* Client Logo Marquee */}
-                <div className="relative">
-                    <div className="text-center mb-6">
-                        <span className="text-white/30 font-mono text-[10px] uppercase tracking-[0.2em]">
-                            Industry leading companies*
-                        </span>
-                    </div>
+            {/* Client Logo Marquee - Full Width Edge-to-Edge */}
+            <div className="relative w-full border-t border-white/5 pt-10">
+                <div className="text-center mb-8">
+                    <span className="text-white/30 font-mono text-[10px] uppercase tracking-[0.2em]">
+                        Industry leading companies*
+                    </span>
+                </div>
 
-                    <div className="flex overflow-hidden">
-                        <motion.div
-                            animate={{ x: [0, -1000] }}
-                            transition={{
-                                repeat: Infinity,
-                                duration: 20,
-                                ease: "linear",
-                            }}
-                            className="flex gap-16 items-center whitespace-nowrap"
-                        >
-                            {[...clients, ...clients].map((client, index) => (
-                                <span
-                                    key={index}
-                                    className="text-white/20 font-display text-2xl md:text-3xl font-bold uppercase tracking-tight hover:text-white/40 transition-colors"
-                                >
-                                    {client}
-                                </span>
-                            ))}
-                        </motion.div>
-                    </div>
+                <div className="flex overflow-hidden relative w-full mask-linear-fade">
+                    <motion.div
+                        animate={{ x: ["0%", "-50%"] }}
+                        transition={{
+                            repeat: Infinity,
+                            duration: 30,
+                            ease: "linear",
+                        }}
+                        className="flex gap-20 items-center whitespace-nowrap min-w-max pl-4"
+                    >
+                        {/* Duplicate list multiple times for seamless infinite loop on distinct screens */}
+                        {[...clients, ...clients, ...clients, ...clients, ...clients, ...clients].map((client, index) => (
+                            <span
+                                key={index}
+                                className="text-white/20 font-display text-4xl md:text-5xl font-bold uppercase tracking-tight hover:text-white/40 transition-colors cursor-default"
+                            >
+                                {client}
+                            </span>
+                        ))}
+                    </motion.div>
                 </div>
             </div>
         </section>
